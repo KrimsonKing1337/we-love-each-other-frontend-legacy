@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="30">
+
+  <title>
+    We love each other
+  </title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%; /* 480px */
+      height: 100%; /* 272px */
+    }
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .bg-img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .first-letter {
+      position: absolute;
+      z-index: 2;
+      top: 40px;
+      left: 40px;
+      font-size: 100px;
+      color: #fff;
+    }
+
+    .second-letter {
+      position: absolute;
+      z-index: 2;
+      top: 200px;
+      left: 40px;
+      font-size: 100px;
+      color: #fff;
+    }
+
+    .counter {
+      position: absolute;
+      z-index: 2;
+      top: 130px;
+      left: 205px;
+      font-size: 100px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+  <img id="bg-img" class="bg-img" src="./bg.jpg" alt="">
+
+  <div id="first-letter" class="first-letter">
+    О
+  </div>
+
+  <div id="second-letter" class="second-letter">
+    П
+  </div>
+
+  <div id="counter" class="counter">
+    1
+  </div>
+</div>
+</body>
+
+<script>
+  document.getElementById('counter').innerHTML = '111';
+
+  var counter = ('; '+document.cookie).split('; counter=').pop().split(';')[0];
+
+  document.getElementById('counter').innerHTML = '222';
+
+  if (!counter) {
+    document.cookie = 'counter=1000';
+  } else {
+    var c = Number(counter);
+
+    c = c + 1;
+
+    var str = 'counter=';
+    str += c;
+
+    document.cookie = str;
+
+    document.getElementById('counter').innerHTML = counter.toString();
+  }
+
+  setTimeout(function() {
+    window.location.reload();
+  }, 30000);
+</script>
+
+<noscript>
+  JS does not work
+</noscript>
+</html>

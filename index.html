@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="30">
+
+  <title>
+    We love each other
+  </title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: url("./bg.jpg") no-repeat center;
+      background-size: cover;
+
+      /* old webkit, opera and ff */
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+
+      /* ie 5.5 */
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+        src='img/home.jpg',
+        sizingMethod=scale);
+
+    }
+
+    .first-letter {
+      position: absolute;
+      z-index: 2;
+      top: 10%;
+      left: 10%;
+      font-size: 500%;
+      color: #fff;
+    }
+
+    .second-letter {
+      position: absolute;
+      z-index: 2;
+      bottom: 10%;
+      right: 10%;
+      font-size: 500%;
+      color: #fff;
+    }
+
+    .counter {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 10%;
+      width: 10%;
+      margin: auto;
+      font-size: 500%;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+  <div id="first-letter" class="first-letter">
+    O
+  </div>
+
+  <div id="second-letter" class="second-letter">
+    P
+  </div>
+
+  <div id="counter" class="counter">
+    1
+  </div>
+</div>
+</body>
+
+<script>
+  document.getElementById('counter').innerHTML = '111';
+
+  var counter = ('; '+document.cookie).split('; counter=').pop().split(';')[0];
+
+  document.getElementById('counter').innerHTML = '222';
+
+  if (!counter) {
+    document.cookie = 'counter=1000';
+  } else {
+    var c = Number(counter);
+
+    c = c + 1;
+
+    var str = 'counter=';
+    str += c;
+
+    document.cookie = str;
+
+    document.getElementById('counter').innerHTML = counter.toString();
+  }
+
+  setTimeout(function() {
+    window.location.reload();
+  }, 30000);
+</script>
+
+<noscript>
+  JS does not work
+</noscript>
+</html>
