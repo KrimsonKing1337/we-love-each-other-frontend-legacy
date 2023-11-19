@@ -2,13 +2,14 @@ const { randomInt } = require('./randomInt.js');
 
 /**
  *
- * @param imgs {string}
+ * @param imgs {object}
+ * @param width {string}
  * @returns {string}
  */
-function getRandomImgPath(imgs) {
-  const random = randomInt(0, imgs.length);
+function getRandomImgPath(imgs, width = '1920') {
+  const random = randomInt(0, imgs[width].length);
 
-  return `img_bg/640/${imgs[random]}`;
+  return `img_bg/${width}/${imgs[width][random]}`;
 }
 
 module.exports = { getRandomImgPath };

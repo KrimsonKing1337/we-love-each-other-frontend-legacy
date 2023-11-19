@@ -8,7 +8,15 @@ const imgs = require('./img_bg.json');
 const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
 // const publicImagesPath = path.resolve('./', '../m-days.ru');
 
-async function main() {
+/**
+ *
+ * @param params
+ * @param params.w {string}
+ * @param params.h {string}
+ * @param params.tz {string}
+ * @returns {Promise<void>}
+ */
+async function main({ w = '1920', h = '1080', tz = '3' }) {
   let date_ob = new Date();
 
   // current date
@@ -36,9 +44,7 @@ async function main() {
   const timeLabel = `${hours}:${minutes}`;
   const dateLabel = `${day}.${month}.${year}`;
 
-  console.log('___', dateLabel);
-
-  const randomImagePath = getRandomImgPath(imgs);
+  const randomImagePath = getRandomImgPath(imgs, w);
   const imagePath = path.join(publicImagesPath, randomImagePath);
 
   const image = await sharp(imagePath);

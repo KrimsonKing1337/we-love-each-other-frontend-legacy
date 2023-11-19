@@ -1,4 +1,5 @@
 const http = require('http');
+const url = require('url');
 const { readFile } = require('fs').promises;
 
 const { main } = require('./psp/generateImgWithText/generateText.js');
@@ -8,13 +9,13 @@ const host = 'localhost';
 const port = 3000;
 
 const requestListener = async function (req, res) {
-  console.log('___', __dirname);
-
   // todo: пресеты типа psp, nokia, а так же распознавать параметры с указанием высоты и ширины экрана
   //  ?w=1920&h=1080&tz=3
 
-  if (req.url === '/') {
-    await main();
+  const params = url.parse(req.url, true).query;
+
+  if (req.url === '/' || req.url.includes('/?')) {
+    await main(params);
 
     const contents = await readFile(__dirname + '/psp/index.html');
 
