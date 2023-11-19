@@ -13,7 +13,7 @@ const requestListener = async function (req, res) {
   //  ?w=1920&h=1080&tz=3
 
   if (req.url === '/' || req.url.includes('/?')) {
-    params = url.parse(req.url, true).query; // todo: wtf???
+    params = url.parse(req.url, true).query; // именно в этом месте нужно получать параметры
 
     const contents = await readFile(__dirname + '/psp/index.html');
 

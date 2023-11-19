@@ -16,6 +16,10 @@ function getRandomImgPath(imgs, width = '1920') {
     w = '1920';
   }
 
+  if (Number(w) < 640) {
+    w = '640';
+  }
+
   const random = randomInt(0, imgs[w].length);
 
   return `img_bg/${w}/${imgs[w][random]}`;

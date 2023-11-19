@@ -8,8 +8,6 @@ const { getRandomImgPath } = require('./getRandomImgPath.js');
 const imgs = require('./img_bg.json');
 const { getDate } = require('./getDate.js');
 
-// const publicImagesPath = path.resolve('./', '../m-days.ru');
-
 /**
  *
  * @param params
@@ -18,7 +16,7 @@ const { getDate } = require('./getDate.js');
  * @param params.tz {string}
  * @returns {Promise}
  */
-async function getImageWithText({ w = '1920', h = '1080', tz = '3' }) {
+async function getImageWithText({ w = '1920', h, tz = '3' }) {
   const {
     day,
     month,
@@ -33,29 +31,38 @@ async function getImageWithText({ w = '1920', h = '1080', tz = '3' }) {
   const randomImagePath = getRandomImgPath(imgs, w);
   const imagePath = path.join(publicImagesPath, randomImagePath);
 
-  const image = await sharp(imagePath);
-  const metadata = await image.metadata();
+  const width = Number(w);
+  const height = h ? Number(h) : undefined;
+
+  const image = await sharp(imagePath).resize({
+    width,
+    height,
+  });
+
+  const resizedImage = await image.toBuffer({ resolveWithObject: true });
+  const metaHeight = resizedImage.info.height;
+  const metaWidth = resizedImage.info.width;
 
   const shadow = Buffer.from(`
-    <svg height="${metadata.height}" width="${metadata.width}">
+    <svg height="${metaHeight}" width="${metaWidth}">
       <rect x="0" y="0" width="100%" height="100%" fill="#000" fill-opacity="0.3" />
     </svg>
   `);
 
-  const timeHeight = metadata.height / 2;
+  const timeHeight = metaHeight / 2;
 
   const time = Buffer.from(`
-    <svg height="${timeHeight}" width="${metadata.width}">
+    <svg height="${timeHeight}" width="${metaWidth}">
       <text x="50%" y="50%" text-anchor="middle" dy="0.4em" font-size="${timeHeight / 2.5}" fill="#fff" font-family="sans">
         ${timeLabel}
       </text> 
     </svg>
   `);
 
-  const dateHeight = metadata.height / 1.6;
+  const dateHeight = metaHeight / 1.6;
 
   const date = Buffer.from(`
-    <svg height="${dateHeight}" width="${metadata.width}">
+    <svg height="${dateHeight}" width="${metaWidth}">
       <text x="50%" y="50%" text-anchor="middle" dy="0.4em" font-size="${dateHeight / 6}" font-stretch="ultra-condensed" fill="#fff" font-family="sans">
         ${dateLabel}
       </text> 
