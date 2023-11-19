@@ -1,12 +1,12 @@
 const path = require('path');
 const sharp = require('sharp');
 
+const { publicImagesPath } = require('../../env.js');
+
 const { getRandomImgPath } = require('./getRandomImgPath.js');
 
 const imgs = require('./img_bg.json');
 const { getDate } = require('./getDate.js');
-
-const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
 
 // const publicImagesPath = path.resolve('./', '../m-days.ru');
 
@@ -18,7 +18,7 @@ const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital
  * @param params.tz {string}
  * @returns {Promise}
  */
-async function main({ w = '1920', h = '1080', tz = '3' }) {
+async function getImageWithText({ w = '1920', h = '1080', tz = '3' }) {
   const {
     day,
     month,
@@ -77,11 +77,8 @@ async function main({ w = '1920', h = '1080', tz = '3' }) {
     }
   ];
 
-  // await image.composite(compositeImages).toFile('result.jpg');
   // await image.composite(compositeImages).toFile(path.join(__dirname, '../bg.jpg'));
   return await image.composite(compositeImages).toBuffer();
 }
 
-// main();
-
-module.exports = { main };
+module.exports = { getImageWithText };
