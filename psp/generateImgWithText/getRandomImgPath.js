@@ -1,4 +1,5 @@
 const { randomInt } = require('./randomInt.js');
+const { allowWidths } = require('./utils.js');
 
 /**
  *
@@ -7,9 +8,17 @@ const { randomInt } = require('./randomInt.js');
  * @returns {string}
  */
 function getRandomImgPath(imgs, width = '1920') {
-  const random = randomInt(0, imgs[width].length);
+  let w = width;
 
-  return `img_bg/${width}/${imgs[width][random]}`;
+  const isAllowWidth = allowWidths.some((allowWidth) => allowWidth === width);
+
+  if (!isAllowWidth) {
+    w = '1920';
+  }
+
+  const random = randomInt(0, imgs[w].length);
+
+  return `img_bg/${w}/${imgs[w][random]}`;
 }
 
 module.exports = { getRandomImgPath };
