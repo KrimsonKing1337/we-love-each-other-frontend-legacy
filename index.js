@@ -1,13 +1,17 @@
 const http = require('http');
 const { readFile } = require('fs').promises;
-const { execSync } = require('child_process');
 
-const host = 'localhost';
+const { main } = require('./psp/generateImgWithText/generateText.js');
+
+const host = '88.212.232.164';
 const port = 3000;
+// const port = 80;
 
-const requestListener = function (req, res) {
+const requestListener = async function (req, res) {
+  console.log('___', __dirname);
+
   if (req.url === '/') {
-    execSync('node ./psp/generateImgWithText/generateText.js');
+    await main();
 
     readFile(__dirname + '/psp/index.html')
       .then(contents => {

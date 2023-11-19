@@ -1,10 +1,12 @@
+const path = require('path');
 const sharp = require('sharp');
 
 const { getRandomImgPath } = require('./getRandomImgPath.js');
-const imgs = require('./img_bg.json');
-const path = require('path');
 
-const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
+const imgs = require('./img_bg.json');
+
+// const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
+const publicImagesPath = path.resolve('./', '../m-days.ru');
 
 async function main() {
   let date_ob = new Date();
@@ -20,10 +22,10 @@ async function main() {
   let year = date_ob.getFullYear();
 
   // current hours
-  let hours = date_ob.getHours();
+  let hours = ('0' + date_ob.getHours()).slice(-2);
 
   // current minutes
-  let minutes = date_ob.getMinutes();
+  let minutes = ('0' + date_ob.getMinutes()).slice(-2);
 
   // current seconds
   let seconds = date_ob.getSeconds();
@@ -87,4 +89,6 @@ async function main() {
   await image.composite(compositeImages).toFile(path.join(__dirname, '../bg.jpg'));
 }
 
-main();
+// main();
+
+module.exports = { main };

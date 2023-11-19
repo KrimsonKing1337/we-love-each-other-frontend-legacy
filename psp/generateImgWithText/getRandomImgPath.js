@@ -8,7 +8,7 @@ const { randomInt } = require('./randomInt.js');
 function getRandomImgPath(imgs) {
   const random = randomInt(0, imgs.length);
 
-  return `img_bg/1920/${imgs[random]}`;
+  return `img_bg/640/${imgs[random]}`;
 }
 
 module.exports = { getRandomImgPath };
