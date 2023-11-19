@@ -16,7 +16,7 @@ const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital
  * @param params.w {string}
  * @param params.h {string}
  * @param params.tz {string}
- * @returns {Promise<void>}
+ * @returns {Promise}
  */
 async function main({ w = '1920', h = '1080', tz = '3' }) {
   const {
@@ -79,11 +79,7 @@ async function main({ w = '1920', h = '1080', tz = '3' }) {
 
   // await image.composite(compositeImages).toFile('result.jpg');
   // await image.composite(compositeImages).toFile(path.join(__dirname, '../bg.jpg'));
-  const result = await image.composite(compositeImages).toBuffer();
-
-  // todo: toBuffer
-
-  return result;
+  return await image.composite(compositeImages).toBuffer();
 }
 
 // main();
