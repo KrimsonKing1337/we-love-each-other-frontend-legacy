@@ -6,7 +6,14 @@ const { getRandomImgPath } = require('./getRandomImgPath.js');
 const imgs = require('./img_bg.json');
 
 const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
+
 // const publicImagesPath = path.resolve('./', '../m-days.ru');
+
+function adjustForTimezone(date, tz = 3 ) {
+  date.setHours(date.getHours() + tz);
+
+  return date;
+}
 
 /**
  *
@@ -17,29 +24,25 @@ const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital
  * @returns {Promise<void>}
  */
 async function main({ w = '1920', h = '1080', tz = '3' }) {
-  let date_ob = new Date();
+  const d = new Date();
+  const dateUtc = new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
+  const dateObj = adjustForTimezone(dateUtc, Number(tz));
 
   // current date
   // adjust 0 before single digit date
-  let day = ('0' + date_ob.getDate()).slice(-2);
+  const day = ('0' + dateObj.getDate()).slice(-2);
 
   // current month
-  let month = ('0' + (date_ob.getMonth() + 1)).slice(-2);
+  const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
 
   // current year
-  let year = date_ob.getFullYear();
+  const year = dateObj.getFullYear();
 
   // current hours
-  let hours = ('0' + date_ob.getHours()).slice(-2);
+  const hours = ('0' + dateObj.getHours()).slice(-2);
 
   // current minutes
-  let minutes = ('0' + date_ob.getMinutes()).slice(-2);
-
-  // current seconds
-  let seconds = date_ob.getSeconds();
-
-  const width = 200;
-  const height = 100;
+  const minutes = ('0' + dateObj.getMinutes()).slice(-2);
 
   const timeLabel = `${hours}:${minutes}`;
   const dateLabel = `${day}.${month}.${year}`;
@@ -48,7 +51,7 @@ async function main({ w = '1920', h = '1080', tz = '3' }) {
   const imagePath = path.join(publicImagesPath, randomImagePath);
 
   const image = await sharp(imagePath);
-  const metadata = await image.metadata()
+  const metadata = await image.metadata();
 
   const shadow = Buffer.from(`
     <svg height="${metadata.height}" width="${metadata.width}">
