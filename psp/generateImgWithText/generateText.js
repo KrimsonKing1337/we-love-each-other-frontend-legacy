@@ -4,16 +4,11 @@ const sharp = require('sharp');
 const { getRandomImgPath } = require('./getRandomImgPath.js');
 
 const imgs = require('./img_bg.json');
+const { getDate } = require('./getDate.js');
 
 const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
 
 // const publicImagesPath = path.resolve('./', '../m-days.ru');
-
-function adjustForTimezone(date, tz = 3 ) {
-  date.setHours(date.getHours() + tz);
-
-  return date;
-}
 
 /**
  *
@@ -24,25 +19,13 @@ function adjustForTimezone(date, tz = 3 ) {
  * @returns {Promise<void>}
  */
 async function main({ w = '1920', h = '1080', tz = '3' }) {
-  const d = new Date();
-  const dateUtc = new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
-  const dateObj = adjustForTimezone(dateUtc, Number(tz));
-
-  // current date
-  // adjust 0 before single digit date
-  const day = ('0' + dateObj.getDate()).slice(-2);
-
-  // current month
-  const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
-
-  // current year
-  const year = dateObj.getFullYear();
-
-  // current hours
-  const hours = ('0' + dateObj.getHours()).slice(-2);
-
-  // current minutes
-  const minutes = ('0' + dateObj.getMinutes()).slice(-2);
+  const {
+    day,
+    month,
+    year,
+    hours,
+    minutes,
+  } = getDate(tz);
 
   const timeLabel = `${hours}:${minutes}`;
   const dateLabel = `${day}.${month}.${year}`;
@@ -95,7 +78,12 @@ async function main({ w = '1920', h = '1080', tz = '3' }) {
   ];
 
   // await image.composite(compositeImages).toFile('result.jpg');
-  await image.composite(compositeImages).toFile(path.join(__dirname, '../bg.jpg'));
+  // await image.composite(compositeImages).toFile(path.join(__dirname, '../bg.jpg'));
+  const result = await image.composite(compositeImages).toBuffer();
+
+  // todo: toBuffer
+
+  return result;
 }
 
 // main();

@@ -15,15 +15,13 @@ const requestListener = async function (req, res) {
   const params = url.parse(req.url, true).query;
 
   if (req.url === '/' || req.url.includes('/?')) {
-    await main(params);
-
     const contents = await readFile(__dirname + '/psp/index.html');
 
     res.setHeader('Content-Type', 'text/html');
     res.writeHead(200);
     res.end(contents);
   } else if (req.url === '/bg.jpg') {
-    const contents = await readFile(__dirname + '/psp/bg.jpg');
+    const contents = await main(params);
 
     res.setHeader('Content-Type', 'image/jpeg');
     res.writeHead(200);
