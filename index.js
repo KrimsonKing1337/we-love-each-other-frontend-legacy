@@ -16,19 +16,17 @@ const requestListener = async function (req, res) {
   if (req.url === '/') {
     await main();
 
-    readFile(__dirname + '/psp/index.html')
-      .then(contents => {
-        res.setHeader('Content-Type', 'text/html');
-        res.writeHead(200);
-        res.end(contents);
-      });
+    const contents = await readFile(__dirname + '/psp/index.html');
+
+    res.setHeader('Content-Type', 'text/html');
+    res.writeHead(200);
+    res.end(contents);
   } else if (req.url === '/bg.jpg') {
-    readFile(__dirname + '/psp/bg.jpg')
-      .then(contents => {
-        res.setHeader('Content-Type', 'image/jpeg');
-        res.writeHead(200);
-        res.end(contents);
-      });
+    const contents = await readFile(__dirname + '/psp/bg.jpg');
+
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.writeHead(200);
+    res.end(contents);
   }
 };
 
