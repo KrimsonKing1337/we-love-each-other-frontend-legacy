@@ -10,6 +10,9 @@ const port = 3000;
 const requestListener = async function (req, res) {
   console.log('___', __dirname);
 
+  // todo: пресеты типа psp, nokia, а так же распознавать параметры с указанием высоты и ширины экрана
+  //  ?w=1920&h=1080&tz=3
+
   if (req.url === '/') {
     await main();
 
