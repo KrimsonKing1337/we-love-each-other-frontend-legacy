@@ -3,9 +3,9 @@ const { readFile } = require('fs').promises;
 
 const { main } = require('./psp/generateImgWithText/generateText.js');
 
-const host = '88.212.232.164';
+// const host = '88.212.232.164';
+const host = 'localhost';
 const port = 3000;
-// const port = 80;
 
 const requestListener = async function (req, res) {
   console.log('___', __dirname);

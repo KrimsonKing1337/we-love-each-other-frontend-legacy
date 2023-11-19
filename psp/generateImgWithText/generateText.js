@@ -5,8 +5,8 @@ const { getRandomImgPath } = require('./getRandomImgPath.js');
 
 const imgs = require('./img_bg.json');
 
-// const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
-const publicImagesPath = path.resolve('./', '../m-days.ru');
+const publicImagesPath = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public');
+// const publicImagesPath = path.resolve('./', '../m-days.ru');
 
 async function main() {
   let date_ob = new Date();
