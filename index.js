@@ -12,17 +12,23 @@ let params = null;
 const requestListener = async function (req, res) {
   // todo: пресеты типа psp, nokia и т.д.
   // todo: генерация картинок без добавления текста по параметру text=true например
-  // todo: обрабатывать параметры (refresh-time=30) для изменения секунд в <meta http-equiv="refresh" content="30">
 
   if (req.url === '/' || req.url.includes('/?')) {
     params = url.parse(req.url, true).query; // именно в этом месте нужно получать параметры
 
     const contents = await readFile(__dirname + '/psp/index.html');
 
-    const contentsReplaced = contents.toString().replace(
+    let contentsReplaced = contents.toString().replace(
       'src="./bg.jpg"',
       `src="./bg_${nanoid()}.jpg"`
     );
+
+    if (params.rt) {
+      contentsReplaced = contentsReplaced.replace(
+        '<meta http-equiv="refresh" content="30">',
+        `<meta http-equiv="refresh" content="${params.rt}">`
+      );
+    }
 
     res.setHeader('Content-Type', 'text/html');
     res.writeHead(200);
