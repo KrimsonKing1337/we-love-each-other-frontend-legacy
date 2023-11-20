@@ -9,8 +9,9 @@ const { getImageWithText } = require('./psp/generateImgWithText/getImageWithText
 let params = null;
 
 const requestListener = async function (req, res) {
-  // todo: пресеты типа psp, nokia, а так же распознавать параметры с указанием высоты и ширины экрана
-  //  ?w=1920&h=1080&tz=3
+  // todo: пресеты типа psp, nokia и т.д.
+  // todo: генерация картинок без текста по параметру text=true например. отдавать index.js с другой html.
+  //  или менять в html путь к картинке ./bg.jpg -> bg[hash][timestamp].jpg ил типа того - для предотвращения кэша
 
   if (req.url === '/' || req.url.includes('/?')) {
     params = url.parse(req.url, true).query; // именно в этом месте нужно получать параметры
