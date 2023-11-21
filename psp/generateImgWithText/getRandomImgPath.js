@@ -20,9 +20,23 @@ function getRandomImgPath(imgs, width = '1920') {
     w = '640';
   }
 
-  const random = randomInt(0, imgs[w].length);
+  const random = randomInt(0, imgs.default[w].length);
 
-  return `img_bg/${w}/${imgs[w][random]}`;
+  return `img_bg/${w}/${imgs.default[w][random]}`;
 }
 
-module.exports = { getRandomImgPath };
+/**
+* @param imgs {object}
+* @param width {string}
+* @returns {string}
+*/
+function getRandomImgPathGif(imgs, width = '1920') {
+  const random = randomInt(0, imgs.pixel.h.length);
+
+  return `pixel/h/${imgs.pixel.h[random]}`;
+}
+
+module.exports = {
+  getRandomImgPath,
+  getRandomImgPathGif,
+};

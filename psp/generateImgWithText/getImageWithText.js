@@ -6,6 +6,7 @@ const { publicImagesPath } = require('../../env.js');
 const { getRandomImgPath } = require('./getRandomImgPath.js');
 
 const imgs = require('./img_bg.json');
+
 const { getDate } = require('./getDate.js');
 
 /**

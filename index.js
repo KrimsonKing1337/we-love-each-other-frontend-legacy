@@ -1,44 +1,24 @@
 const http = require('http');
-const url = require('url');
-const { readFile } = require('fs').promises;
-const { nanoid } = require('nanoid');
 
 const { host, port } = require('./env.js');
 
-const { getImageWithText } = require('./psp/generateImgWithText/getImageWithText.js');
-
-let params = null;
+const { rootHandler } = require('./be/requestHandlers/rootHandler.js');
+const { imageGifHandler } = require('./be/requestHandlers/imageGifHandler.js');
+const { imageStaticHandler } = require('./be/requestHandlers/imageStaticHandler.js');
+const { getParams } = require('./be/utils/getParams.js');
 
 const requestListener = async function (req, res) {
   // todo: пресеты типа psp, nokia и т.д.
   // todo: генерация картинок без добавления текста по параметру text=true например
 
   if (req.url === '/' || req.url.includes('/?')) {
-    params = url.parse(req.url, true).query; // именно в этом месте нужно получать параметры
+    getParams(req, true);
 
-    const contents = await readFile(__dirname + '/psp/index.html');
-
-    let contentsReplaced = contents.toString().replace(
-      'src="./bg.jpg"',
-      `src="./bg_${nanoid()}.jpg"`
-    );
-
-    if (params.rt) {
-      contentsReplaced = contentsReplaced.replace(
-        '<meta http-equiv="refresh" content="30">',
-        `<meta http-equiv="refresh" content="${params.rt}">`
-      );
-    }
-
-    res.setHeader('Content-Type', 'text/html');
-    res.writeHead(200);
-    res.end(contentsReplaced);
-  } else if (req.url.includes('/bg')) {
-    const contents = await getImageWithText(params);
-
-    res.setHeader('Content-Type', 'image/jpeg');
-    res.writeHead(200);
-    res.end(contents);
+    await rootHandler(req, res);
+  } else if (req.url.includes('.gif')) {
+    await imageGifHandler(req, res);
+  } else if (req.url.includes('.jpg')) {
+    await imageStaticHandler(req, res);
   }
 };
 
