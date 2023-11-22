@@ -27,13 +27,13 @@ function getRandomImgPath(imgs, width = '1920') {
 
 /**
 * @param imgs {object}
-* @param width {string}
+* @param variant {string}
 * @returns {string}
 */
-function getRandomImgPathGif(imgs, width = '1920') {
-  const random = randomInt(0, imgs.pixel.h.length);
+function getRandomImgPathGif(imgs, variant = 'h') {
+  const random = randomInt(0, imgs.pixel[variant].length);
 
-  return `pixel/h/${imgs.pixel.h[random]}`;
+  return `pixel/h/${imgs.pixel[variant][random]}`;
 }
 
 module.exports = {

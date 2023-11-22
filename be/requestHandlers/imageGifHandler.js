@@ -1,12 +1,11 @@
 const path = require('path');
-
 const { readFile } = require('fs').promises;
 
-const imgs = require('../../psp/generateImgWithText/img_bg.json');
+const { publicImagesPath } = require(process.env.appRoot + '/env.js');
 
-const { publicImagesPath } = require('../../env.js');
+const { getRandomImgPathGif } = require(process.env.fe + '/utils/getRandomImgPath.js');
 
-const { getRandomImgPathGif } = require('../../psp/generateImgWithText/getRandomImgPath.js');
+const imgs = require(process.env.fe + '/img_bg.json');
 
 async function imageGifHandler(req, res) {
   const randomImagePath = getRandomImgPathGif(imgs);

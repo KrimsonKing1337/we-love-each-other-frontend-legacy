@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node start.js .",
+    "scan-images": "node start.js ./fe/utils/scanImgs.js"
   },
   "repository": {
     "type": "git",
@@ -13,6 +15,7 @@
   "author": "Oleg Shilov jr",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "nanoid": "^3.1.31",
     "sharp": "^0.32.6"
   }

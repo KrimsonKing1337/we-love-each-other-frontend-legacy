@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const defaultImages = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public/img_bg');
-const pixelImages = path.resolve(__dirname, '../../../../m-days/01. digital/m-days-public/pixel');
+const { publicImagesPath } = require('../../env.js');
+
+const defaultImages = path.join(publicImagesPath, 'img_bg');
+const pixelImages = path.join(publicImagesPath, 'pixel');
 
 /**
  *
@@ -31,7 +33,9 @@ try {
     pixel: pixelImagesString,
   };
 
-  fs.writeFileSync(`./img_bg.json`, JSON.stringify(result));
+  const pathOfFile = path.join(__dirname, 'img_bg.json');
+
+  fs.writeFileSync(pathOfFile, JSON.stringify(result));
 } catch (err) {
   console.log(err);
 }

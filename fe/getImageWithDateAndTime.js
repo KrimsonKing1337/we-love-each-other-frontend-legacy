@@ -1,13 +1,12 @@
 const path = require('path');
 const sharp = require('sharp');
 
-const { publicImagesPath } = require('../../env.js');
+const { publicImagesPath } = require('../env.js');
 
-const { getRandomImgPath } = require('./getRandomImgPath.js');
+const { getRandomImgPath } = require('./utils/getRandomImgPath.js');
+const { getDate } = require('./utils/getDate.js');
 
 const imgs = require('./img_bg.json');
-
-const { getDate } = require('./getDate.js');
 
 /**
  *
@@ -17,7 +16,7 @@ const { getDate } = require('./getDate.js');
  * @param params.tz {string}
  * @returns {Promise}
  */
-async function getImageWithText({ w = '1920', h, tz = '3' }) {
+async function getImageWithDateAndTime({ w = '1920', h, tz = '3' }) {
   const {
     day,
     month,
@@ -89,4 +88,4 @@ async function getImageWithText({ w = '1920', h, tz = '3' }) {
   return await image.composite(compositeImages).toBuffer();
 }
 
-module.exports = { getImageWithText };
+module.exports = { getImageWithDateAndTime };

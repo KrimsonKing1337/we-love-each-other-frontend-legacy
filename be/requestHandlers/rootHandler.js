@@ -7,7 +7,7 @@ const { replaceMetaRefresh } = require('../utils/replaceMetaRefresh.js');
 async function rootHandler(req, res) {
   const params = getParams();
 
-  const contents = await readFile(process.cwd() + '/psp/index.html');
+  const contents = await readFile(process.env.fe + '/index.html');
 
   let imageType = 'static';
 

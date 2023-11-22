@@ -1,11 +1,11 @@
-const { getImageWithText } = require('../../psp/generateImgWithText/getImageWithText.js');
+const { getImageWithDateAndTime } = require(process.env.fe + '/getImageWithDateAndTime.js');
 
 const { getParams } = require('../utils/getParams.js');
 
 async function imageStaticHandler(req, res) {
   const params = getParams();
 
-  const contents = await getImageWithText(params);
+  const contents = await getImageWithDateAndTime(params);
 
   res.setHeader('Content-Type', 'image/jpg');
   res.writeHead(200);
