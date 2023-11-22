@@ -33,7 +33,7 @@ function getRandomImgPath(imgs, width = '1920') {
 function getRandomImgPathGif(imgs, variant = 'h') {
   const random = randomInt(0, imgs.pixel[variant].length);
 
-  return `pixel/h/${imgs.pixel[variant][random]}`;
+  return `pixel/${variant}/${imgs.pixel[variant][random]}`;
 }
 
 module.exports = {
