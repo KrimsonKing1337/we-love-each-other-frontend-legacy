@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./scripts/start.js .",
-    "scan-images": "node ./scripts/start.js ./scanImgs.js"
+    "scan-images": "node ./scripts/start.js ./scripts/scanImgs.js"
   },
   "repository": {
     "type": "git",

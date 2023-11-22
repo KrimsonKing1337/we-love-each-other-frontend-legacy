@@ -33,7 +33,7 @@ try {
     pixel: pixelImagesString,
   };
 
-  const pathOfFile = path.join(__dirname, 'img_bg.json');
+  const pathOfFile = path.join(process.env.appRoot, '/fe/img_bg.json');
 
   fs.writeFileSync(pathOfFile, JSON.stringify(result));
 } catch (err) {
