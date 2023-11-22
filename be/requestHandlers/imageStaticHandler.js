@@ -1,4 +1,4 @@
-const { getImageWithDateAndTime } = require(process.env.fe + '/getImageWithDateAndTime.js');
+const { getImageWithDateAndTime } = require(process.env.fe + '/utils/getImageWithDateAndTime.js');
 
 const { getParams } = require('../utils/getParams.js');
 

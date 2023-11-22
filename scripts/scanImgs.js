@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { publicImagesPath } = require('../../env.js');
+const { publicImagesPath } = require('../env.js');
 
 const defaultImages = path.join(publicImagesPath, 'img_bg');
 const pixelImages = path.join(publicImagesPath, 'pixel');

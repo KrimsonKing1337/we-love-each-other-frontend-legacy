@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node start.js .",
-    "scan-images": "node start.js ./fe/utils/scanImgs.js"
+    "start": "node ./scripts/start.js .",
+    "scan-images": "node ./scripts/start.js ./scanImgs.js"
   },
   "repository": {
     "type": "git",

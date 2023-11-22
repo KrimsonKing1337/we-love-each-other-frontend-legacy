@@ -1,12 +1,12 @@
 const path = require('path');
 const sharp = require('sharp');
 
-const { publicImagesPath } = require('../env.js');
+const { publicImagesPath } = require(process.env.appRoot + './env.js');
 
-const { getRandomImgPath } = require('./utils/getRandomImgPath.js');
-const { getDate } = require('./utils/getDate.js');
+const { getRandomImgPath } = require('./getRandomImgPath.js');
+const { getDate } = require('./getDate.js');
 
-const imgs = require('./img_bg.json');
+const imgs = require('../img_bg.json');
 
 /**
  *
@@ -53,7 +53,15 @@ async function getImageWithDateAndTime({ w = '1920', h, tz = '3' }) {
 
   const time = Buffer.from(`
     <svg height="${timeHeight}" width="${metaWidth}">
-      <text x="50%" y="50%" text-anchor="middle" dy="0.4em" font-size="${timeHeight / 2.5}" fill="#fff" font-family="sans">
+      <text 
+        x="50%" 
+        y="50%" 
+        text-anchor="middle" 
+        dy="0.4em" 
+        font-size="${timeHeight / 2.5}" 
+        fill="#fff" 
+        font-family="sans"
+      >
         ${timeLabel}
       </text> 
     </svg>
@@ -63,7 +71,16 @@ async function getImageWithDateAndTime({ w = '1920', h, tz = '3' }) {
 
   const date = Buffer.from(`
     <svg height="${dateHeight}" width="${metaWidth}">
-      <text x="50%" y="50%" text-anchor="middle" dy="0.4em" font-size="${dateHeight / 6}" font-stretch="ultra-condensed" fill="#fff" font-family="sans">
+      <text 
+        x="50%" 
+        y="50%" 
+        text-anchor="middle" 
+        dy="0.4em" 
+        font-size="${dateHeight / 6}"
+        font-stretch="ultra-condensed"
+        fill="#fff" 
+        font-family="sans"
+        >
         ${dateLabel}
       </text> 
     </svg>
