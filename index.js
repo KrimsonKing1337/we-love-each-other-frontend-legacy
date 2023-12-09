@@ -16,7 +16,8 @@ const requestListener = async function (req, res) {
     const lastSymbol = url[url.length - 1];
 
     if (lastSymbol === '/') {
-      req.url = url.slice(0, -1);
+      // req.url = url.slice(0, -1);
+      req.url = url.replace(/\/+$/, '');
     }
 
     getParams(req);
