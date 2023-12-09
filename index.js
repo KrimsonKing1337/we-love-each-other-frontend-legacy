@@ -12,7 +12,14 @@ const requestListener = async function (req, res) {
   // todo: генерация картинок без добавления текста по параметру text=true например
 
   if (req.url === '/' || req.url.includes('/?')) {
-    getParams(req, true);
+    const { url } = req;
+    const lastSymbol = url[url.length - 1];
+
+    if (lastSymbol === '/') {
+      req.url = url.slice(0, -1);
+    }
+
+    getParams(req);
 
     await rootHandler(req, res);
   } else if (req.url.includes('.gif')) {
